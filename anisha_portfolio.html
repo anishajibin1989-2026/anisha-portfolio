@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anisha Sadanandan – Project Manager</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f1117;
+    --paper: #f5f2ec;
+    --accent: #c8602a;
+    --muted: #7a7469;
+    --line: #d8d3ca;
+    --card: #ffffff;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 4rem;
+    background: rgba(245,242,236,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--muted);
+    font-size: 0.82rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 8rem 4rem 4rem;
+    gap: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    right: -100px; top: 50%;
+    transform: translateY(-50%);
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,96,42,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.2rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .hero-label::before {
+    content: '';
+    display: block; width: 30px; height: 1px;
+    background: var(--accent);
+  }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 5vw, 5rem);
+    font-weight: 700;
+    line-height: 1.05;
+    margin-bottom: 1.5rem;
+    color: var(--ink);
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .hero-desc {
+    color: var(--muted);
+    font-size: 1rem;
+    max-width: 440px;
+    margin-bottom: 2.5rem;
+    line-height: 1.8;
+  }
+  .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.9rem 2rem;
+    border-radius: 2px;
+    font-size: 0.82rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    transition: all 0.25s;
+    cursor: pointer;
+    border: none;
+  }
+  .btn-primary {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .btn-primary:hover { background: var(--accent); }
+  .btn-outline {
+    background: transparent;
+    color: var(--ink);
+    border: 1.5px solid var(--ink);
+  }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+  .hero-stats {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .stat-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    padding: 2rem 1.5rem;
+    border-radius: 4px;
+    text-align: center;
+    transition: box-shadow 0.2s;
+  }
+  .stat-card:hover { box-shadow: 0 8px 30px rgba(0,0,0,0.08); }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+  .stat-label {
+    font-size: 0.78rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* SECTION BASE */
+  section { padding: 6rem 4rem; }
+  .section-header {
+    display: flex; align-items: baseline; gap: 1.5rem;
+    margin-bottom: 3.5rem;
+  }
+  .section-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    color: var(--accent);
+    font-style: italic;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3vw, 2.8rem);
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .section-line {
+    flex: 1; height: 1px;
+    background: var(--line);
+    margin-bottom: 4px;
+  }
+
+  /* ABOUT */
+  #about {
+    background: var(--card);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+  .about-text p {
+    color: var(--muted);
+    margin-bottom: 1.2rem;
+    font-size: 1rem;
+    line-height: 1.85;
+  }
+  .about-text p strong { color: var(--ink); }
+  .cert-list { list-style: none; }
+  .cert-list li {
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.88rem;
+    display: flex; align-items: center; gap: 0.7rem;
+    color: var(--ink);
+  }
+  .cert-list li::before {
+    content: '◆';
+    color: var(--accent);
+    font-size: 0.5rem;
+    flex-shrink: 0;
+  }
+  .cert-list li:last-child { border-bottom: none; }
+  .cert-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1rem;
+  }
+
+  /* SKILLS */
+  #skills { background: var(--paper); }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .skill-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    padding: 2rem;
+    border-radius: 4px;
+    transition: all 0.25s;
+  }
+  .skill-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+  }
+  .skill-icon {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .skill-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.8rem;
+  }
+  .skill-tags {
+    display: flex; flex-wrap: wrap; gap: 0.4rem;
+    margin-top: 1rem;
+  }
+  .tag {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    padding: 0.25rem 0.7rem;
+    border-radius: 2px;
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  /* EXPERIENCE */
+  #experience { background: var(--card); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .timeline { position: relative; padding-left: 2rem; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 8px; bottom: 0;
+    width: 1px;
+    background: var(--line);
+  }
+  .timeline-item {
+    position: relative;
+    padding-bottom: 3rem;
+    padding-left: 2rem;
+  }
+  .timeline-item:last-child { padding-bottom: 0; }
+  .timeline-dot {
+    position: absolute;
+    left: -2.4rem; top: 6px;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--paper);
+    box-shadow: 0 0 0 1px var(--accent);
+  }
+  .timeline-meta {
+    display: flex; align-items: center; gap: 1rem;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .timeline-period {
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+  }
+  .timeline-company {
+    font-size: 0.82rem;
+    color: var(--muted);
+  }
+  .timeline-item h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.8rem;
+  }
+  .timeline-item ul {
+    list-style: none;
+    display: flex; flex-direction: column; gap: 0.5rem;
+  }
+  .timeline-item ul li {
+    font-size: 0.9rem;
+    color: var(--muted);
+    padding-left: 1.2rem;
+    position: relative;
+    line-height: 1.6;
+  }
+  .timeline-item ul li::before {
+    content: '→';
+    position: absolute; left: 0;
+    color: var(--accent);
+    font-size: 0.8rem;
+  }
+  .highlight-metric {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  /* PROJECTS */
+  #projects { background: var(--paper); }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+  .project-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 2rem;
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 0;
+    background: var(--accent);
+    transition: height 0.3s;
+  }
+  .project-card:hover::before { height: 100%; }
+  .project-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.07);
+  }
+  .project-domain {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.8rem;
+  }
+  .project-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.8rem;
+  }
+  .project-card p {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+  .project-metrics {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    border-top: 1px solid var(--line);
+    padding-top: 1rem;
+  }
+  .metric {
+    font-size: 0.78rem;
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .metric span {
+    color: var(--accent);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  /* AWARDS */
+  #awards { background: var(--ink); color: var(--paper); }
+  #awards .section-title { color: var(--paper); }
+  #awards .section-line { background: rgba(255,255,255,0.15); }
+  .awards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .award-card {
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 2rem;
+    border-radius: 4px;
+    transition: border-color 0.25s;
+  }
+  .award-card:hover { border-color: var(--accent); }
+  .award-year {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 0.8rem;
+  }
+  .award-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--paper);
+    margin-bottom: 0.4rem;
+  }
+  .award-org {
+    font-size: 0.78rem;
+    color: rgba(245,242,236,0.5);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+  .award-card p {
+    font-size: 0.85rem;
+    color: rgba(245,242,236,0.6);
+    line-height: 1.6;
+  }
+
+  /* CONTACT */
+  #contact {
+    background: var(--paper);
+    text-align: center;
+  }
+  #contact .section-header { justify-content: center; }
+  .contact-subtitle {
+    color: var(--muted);
+    font-size: 1rem;
+    max-width: 500px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.8;
+  }
+  .contact-links {
+    display: flex; justify-content: center;
+    flex-wrap: wrap; gap: 1rem;
+    margin-bottom: 3rem;
+  }
+  .contact-item {
+    display: flex; align-items: center; gap: 0.6rem;
+    background: var(--card);
+    border: 1px solid var(--line);
+    padding: 0.9rem 1.5rem;
+    border-radius: 4px;
+    text-decoration: none;
+    color: var(--ink);
+    font-size: 0.88rem;
+    transition: all 0.2s;
+  }
+  .contact-item:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--ink);
+    color: rgba(245,242,236,0.4);
+    text-align: center;
+    padding: 2rem 4rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-label { animation: fadeUp 0.6s ease both; }
+  .hero h1 { animation: fadeUp 0.6s 0.1s ease both; }
+  .hero-desc { animation: fadeUp 0.6s 0.2s ease both; }
+  .hero-ctas { animation: fadeUp 0.6s 0.3s ease both; }
+  .hero-stats { animation: fadeUp 0.6s 0.4s ease both; }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 2rem; }
+    .nav-links { gap: 1.5rem; }
+    .hero { grid-template-columns: 1fr; padding: 7rem 2rem 3rem; }
+    .hero-stats { grid-template-columns: repeat(3, 1fr); }
+    section { padding: 4rem 2rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .skills-grid, .awards-grid { grid-template-columns: 1fr 1fr; }
+    .projects-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    .nav-links { display: none; }
+    .hero-stats { grid-template-columns: 1fr 1fr; }
+    .skills-grid, .awards-grid { grid-template-columns: 1fr; }
+    .hero { padding: 6rem 1.5rem 2rem; }
+    section { padding: 3rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#">Anisha S.</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#awards">Awards</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-content">
+    <div class="hero-label">Project Manager · Dublin, Ireland</div>
+    <h1>Delivering <em>complex</em> projects with precision</h1>
+    <p class="hero-desc">Certified Scrum Master with 12+ years driving digital transformation across government, healthcare, e-learning, logistics, and utilities — now amplified with MSc Big Data Analytics expertise.</p>
+    <div class="hero-ctas">
+      <a href="#experience" class="btn btn-primary">View Experience</a>
+      <a href="mailto:anisha3089@gmail.com" class="btn btn-outline">Get in Touch</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-card">
+      <div class="stat-num">12+</div>
+      <div class="stat-label">Years Experience</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">96%</div>
+      <div class="stat-label">On-Time Delivery</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">€1.5M</div>
+      <div class="stat-label">Budget Managed</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">8+</div>
+      <div class="stat-label">End-to-End Projects</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">89%</div>
+      <div class="stat-label">Sprint Predictability</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">40%</div>
+      <div class="stat-label">Reporting Time Saved</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <h2 class="section-title">About Me</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I'm a <strong>Project Manager and Certified Scrum Master</strong> based in Dublin, Ireland, with over 12 years of experience delivering complex technology and digital transformation projects across highly regulated sectors including government, healthcare, education, logistics, and utilities.</p>
+      <p>My strengths lie in <strong>Agile and hybrid delivery</strong>, executive-level stakeholder governance, multi-vendor coordination, and building data-driven reporting cultures. I've managed cross-functional teams of up to 18 people while maintaining zero escalation surprises across all engagements.</p>
+      <p>In 2025, I completed an <strong>MSc in Big Data Management & Analytics</strong> at Griffith College Dublin, adding Power BI dashboarding, Python, and machine learning capabilities to my delivery toolkit — enabling me to lead modern, analytics-informed project environments.</p>
+      <p>I'm currently seeking <strong>Project/Delivery Manager or Programme Manager</strong> roles in technology and consulting in Ireland, where I can bring both my proven delivery record and emerging data analytics edge.</p>
+    </div>
+    <div>
+      <div class="cert-label">Certifications &amp; Education</div>
+      <ul class="cert-list">
+        <li>Certified Scrum Master (CSM) — Active</li>
+        <li>PMP — Project Management Professional (In Progress)</li>
+        <li>MSc Big Data Management & Analytics — Griffith College Dublin</li>
+        <li>Applied Machine Learning (2025)</li>
+        <li>Generative AI Certification (2026)</li>
+        <li>R for Data Science (2024)</li>
+        <li>ISO Internal Auditor — Active</li>
+        <li>CMMI-ATM Member — Active</li>
+        <li>MBA in Human Resource Management</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Core Skills</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-icon">🗂</div>
+      <h3>Delivery Frameworks</h3>
+      <p style="font-size:0.88rem;color:var(--muted);line-height:1.6;">Expert in Agile/Scrum, Hybrid, Waterfall, and Kanban — adapting the right methodology to project context and team maturity.</p>
+      <div class="skill-tags">
+        <span class="tag">Agile / Scrum</span>
+        <span class="tag">Kanban</span>
+        <span class="tag">Waterfall</span>
+        <span class="tag">Hybrid</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">📊</div>
+      <h3>Data & Reporting</h3>
+      <p style="font-size:0.88rem;color:var(--muted);line-height:1.6;">Built Power BI KPI dashboards improving sprint predictability from 61% to 89%. Proficient in Python, R, JIRA, and MS Project.</p>
+      <div class="skill-tags">
+        <span class="tag">Power BI</span>
+        <span class="tag">Python</span>
+        <span class="tag">JIRA</span>
+        <span class="tag">MS Project</span>
+        <span class="tag">R</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🤝</div>
+      <h3>Stakeholder & Governance</h3>
+      <p style="font-size:0.88rem;color:var(--muted);line-height:1.6;">Proven in executive-level governance, RAID management, and multi-vendor coordination with zero escalation surprises.</p>
+      <div class="skill-tags">
+        <span class="tag">RAID Management</span>
+        <span class="tag">Executive Reporting</span>
+        <span class="tag">Vendor Management</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🔄</div>
+      <h3>Change Management</h3>
+      <p style="font-size:0.88rem;color:var(--muted);line-height:1.6;">Achieved 94% ERP adoption rate in 6 weeks; reduced scope creep by 35% through structured planning and stakeholder communication.</p>
+      <div class="skill-tags">
+        <span class="tag">Change Management</span>
+        <span class="tag">Risk Management</span>
+        <span class="tag">Training</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🏥</div>
+      <h3>Domain Expertise</h3>
+      <p style="font-size:0.88rem;color:var(--muted);line-height:1.6;">Deep cross-sector knowledge spanning healthcare (HIS/EMR), government IT, e-learning, logistics, supply chain, and utilities.</p>
+      <div class="skill-tags">
+        <span class="tag">Healthcare</span>
+        <span class="tag">Government</span>
+        <span class="tag">Logistics</span>
+        <span class="tag">E-learning</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🤖</div>
+      <h3>Analytics & AI</h3>
+      <p style="font-size:0.88rem;color:var(--muted);line-height:1.6;">MSc-level knowledge in machine learning, Big Data, and Generative AI — bringing an analytics edge to project decision-making.</p>
+      <div class="skill-tags">
+        <span class="tag">Machine Learning</span>
+        <span class="tag">Big Data</span>
+        <span class="tag">Generative AI</span>
+        <span class="tag">.NET</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <h2 class="section-title">Experience</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="timeline">
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-meta">
+        <span class="timeline-period">Mar 2021 – Aug 2024</span>
+        <span class="timeline-company">Emvigo Technologies, Kochi, India</span>
+      </div>
+      <h3>Project Manager</h3>
+      <ul>
+        <li>Delivered <span class="highlight-metric">8+ end-to-end IT and digital transformation projects</span> across education, logistics, and utilities with a <span class="highlight-metric">96% on-time delivery rate</span>.</li>
+        <li>Managed combined budgets of up to <span class="highlight-metric">€1.5M</span>, leading cross-functional teams of 12–18 including 4 third-party vendors.</li>
+        <li>Designed and deployed <span class="highlight-metric">Power BI KPI dashboards</span> for 5 project portfolios, improving sprint predictability from 61% to 89% and reducing executive reporting time by 40%.</li>
+        <li>Maintained zero escalation surprises across all engagements through structured RAID reviews and weekly governance reporting.</li>
+        <li>Coordinated full SDLC across Agile and Hybrid delivery models from design through to go-live and handover.</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-meta">
+        <span class="timeline-period">Jul 2020 – Mar 2021</span>
+        <span class="timeline-company">Fingent Global Solutions, Kochi, India</span>
+      </div>
+      <h3>Project Analyst</h3>
+      <ul>
+        <li>Facilitated daily standups, sprint planning, and retrospectives for 3 Agile teams, achieving a consistent <span class="highlight-metric">2-week release cadence</span>.</li>
+        <li>Coordinated UAT planning across 2 product releases ensuring <span class="highlight-metric">zero critical defects at go-live</span>.</li>
+        <li>Proactively tracked and mitigated risks, dependencies, and blockers across education and inventory management platforms.</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-meta">
+        <span class="timeline-period">Nov 2018 – Jul 2020</span>
+        <span class="timeline-company">Finlead Logiticks, Kochi, India</span>
+      </div>
+      <h3>Project Manager</h3>
+      <ul>
+        <li>Owned project controls — schedule, effort tracking, risk management, and governance — for supply chain and process optimisation programmes.</li>
+        <li>Reduced scope creep incidents by <span class="highlight-metric">35%</span> through collaborative execution strategy development with business and technical stakeholders.</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-meta">
+        <span class="timeline-period">Jan 2017 – Nov 2018</span>
+        <span class="timeline-company">KELTRON, Trivandrum, India</span>
+      </div>
+      <h3>Business Analyst</h3>
+      <ul>
+        <li>Managed end-to-end change management for an ERP system upgrade, achieving a <span class="highlight-metric">94% adoption rate in 6 weeks</span>.</li>
+        <li>Documented requirements for 3 major government IT system projects; supported ISO and CMMI process maturity initiatives contributing to a <span class="highlight-metric">Level 3 CMMI assessment</span>.</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-meta">
+        <span class="timeline-period">Aug 2013 – Jan 2017</span>
+        <span class="timeline-company">Amrita Institute of Medical Sciences, India</span>
+      </div>
+      <h3>Junior Engineer</h3>
+      <ul>
+        <li>Led HIS/EMR system implementation for a 1,450-bed hospital, training <span class="highlight-metric">120+ clinical staff</span>, resulting in a <span class="highlight-metric">30% reduction in documentation errors</span> within 3 months.</li>
+        <li>Managed project coordination across Healthcare HIS/EMR, Asset Management, and Pharmacy domains.</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <h2 class="section-title">Key Projects</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="projects-grid">
+    <div class="project-card">
+      <div class="project-domain">Healthcare · IT</div>
+      <h3>HIS/EMR Hospital Implementation</h3>
+      <p>End-to-end implementation of a Hospital Information and Electronic Medical Records system across a 1,450-bed hospital. Coordinated technical and clinical stakeholders across departments, designed training programmes, and managed full UAT cycles.</p>
+      <div class="project-metrics">
+        <div class="metric"><span>30%</span> reduction in documentation errors</div>
+        <div class="metric"><span>120+</span> staff trained</div>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-domain">Analytics · Portfolio Management</div>
+      <h3>Power BI KPI Dashboard Suite</h3>
+      <p>Designed and deployed Power BI dashboards across 5 project portfolios at Emvigo Technologies. Automated executive reporting, surfaced sprint-level health metrics, and introduced data-driven governance routines across the delivery organisation.</p>
+      <div class="project-metrics">
+        <div class="metric"><span>61% → 89%</span> sprint predictability</div>
+        <div class="metric"><span>40%</span> less reporting time</div>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-domain">Government · ERP</div>
+      <h3>ERP System Upgrade – KELTRON</h3>
+      <p>Managed full change management lifecycle for a government ERP upgrade. Designed structured training and stakeholder communication plans, produced workflow maps and use cases, and coordinated multi-department rollout.</p>
+      <div class="project-metrics">
+        <div class="metric"><span>94%</span> adoption rate</div>
+        <div class="metric"><span>6 weeks</span> to full rollout</div>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-domain">Digital Transformation · Multi-domain</div>
+      <h3>IT Transformation Portfolio – Emvigo</h3>
+      <p>Delivered 8+ end-to-end projects spanning education platforms, logistics systems, and utilities infrastructure. Managed multi-vendor delivery with 4 third-party vendors, maintaining full SDLC governance from estimation through go-live.</p>
+      <div class="project-metrics">
+        <div class="metric"><span>€1.5M</span> budget managed</div>
+        <div class="metric"><span>96%</span> on-time delivery</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AWARDS -->
+<section id="awards">
+  <div class="section-header">
+    <span class="section-num">05</span>
+    <h2 class="section-title">Recognition</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="awards-grid">
+    <div class="award-card">
+      <div class="award-year">2023</div>
+      <h3>Best Project Manager Award</h3>
+      <div class="award-org">Emvigo Technologies</div>
+      <p>Recognised among 200+ staff for outstanding delivery performance and stakeholder management excellence.</p>
+    </div>
+    <div class="award-card">
+      <div class="award-year">2018</div>
+      <h3>Outstanding Performance Award</h3>
+      <div class="award-org">KELTRON / IT Mission</div>
+      <p>Awarded by the Director of IT Mission, Government of Kerala, for best-in-class performance in government technology delivery.</p>
+    </div>
+    <div class="award-card">
+      <div class="award-year">2016</div>
+      <h3>Best Software Development Award</h3>
+      <div class="award-org">Amrita Institute of Medical Sciences</div>
+      <p>Awarded for HIS/EMR implementation quality and exceptional cross-functional team coordination across clinical departments.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header">
+    <span class="section-num">06</span>
+    <h2 class="section-title">Get in Touch</h2>
+  </div>
+  <p class="contact-subtitle">Open to Project Manager, Delivery Manager, and Programme Manager roles in technology and consulting across Ireland. Let's connect.</p>
+  <div class="contact-links">
+    <a class="contact-item" href="mailto:anisha3089@gmail.com">
+      ✉ anisha3089@gmail.com
+    </a>
+    <a class="contact-item" href="tel:+353894937013">
+      📞 +353 89 493 7013
+    </a>
+    <a class="contact-item" href="https://linkedin.com/in/anisha-ns" target="_blank">
+      🔗 linkedin.com/in/anisha-ns
+    </a>
+    <a class="contact-item" href="#">
+      📍 Dublin, Ireland (Stamp 1G)
+    </a>
+  </div>
+  <a href="mailto:anisha3089@gmail.com" class="btn btn-primary">Send a Message →</a>
+</section>
+
+<footer>
+  <p>© 2025 Anisha Sadanandan · Project Manager · Dublin, Ireland</p>
+</footer>
+
+</body>
+</html>
